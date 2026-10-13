@@ -13,11 +13,13 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Build APK Automatically
+      - name: Unzip project and build
         run: |
+          unzip -q HandControl.zip
+          # البحث التلقائي عن ملف الـ gradlew بعد فك الضغط
           GRADLEW_PATH=$(find . -name gradlew -type f)
           PROJECT_DIR=$(dirname "$GRADLEW_PATH")
-          echo "Found gradlew in: $PROJECT_DIR"
+          echo "Found project in: $PROJECT_DIR"
           cd "$PROJECT_DIR"
           chmod +x gradlew
           ./gradlew assembleDebug
